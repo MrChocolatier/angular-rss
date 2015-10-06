@@ -1,0 +1,13 @@
+h1
+  | RSS home page
+hr
+div(ng-repeat='item in hc.rssFirst')
+  h2
+    | {{item.author}}
+  div(ng-bind-html='item.content')
+  p
+    | {{item.publishedDate}}
+  a(ng-href='{{item.link}}')
+    | {{item.title}}
+  hr
+
