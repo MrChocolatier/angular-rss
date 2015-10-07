@@ -17,7 +17,7 @@ table(class="manage-tbl")
         | {{entry.url}}
       input(ng-model="current_edit.url" ng-if="current_edit.url == entry.url")
     td
-      span(class="btn" ng-click="delete(entry.url)")
+      span(class="btn" ng-click="delete(entry.$id)")
         | Delete
-      span(class="btn" ng-click="edit(entry.url)")
+      span(class="btn" ng-click="edit(entry.url, entry.$id)")
         | {{(current_edit.url == entry.url ? 'Save' : 'Edit')}}

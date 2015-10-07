@@ -14,40 +14,37 @@
     }
 
     //@ngInject
-    function feedsListDirectiveFn(rssFactory) {
+    function feedsListDirectiveFn(rssFactory, feedManage) {
       return {
         templateUrl: 'components/manageRssList/manageRssList.html',
         link: function(scope, element, attrs) {
             //Todo: get data somehow
-            var data = [
-              {
-                  name: "TED talks",
-                  url: 'http://feeds.feedburner.com/TEDTalks_video',
-              },
-              {
-                  name: "National geographic",
-                  url: 'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/',
-              },
-              {
-                  name: "Craigslist",
-                  url: 'http://sfbay.craigslist.org/eng/index.rss',
-              },
-              {
-                  name: "Slate",
-                  url: 'http://www.slate.com/blogs/trending.fulltext.all.10.rss'
-              }
-            ];
+            // var data = [
+            //   {
+            //       name: "TED talks",
+            //       url: 'http://feeds.feedburner.com/TEDTalks_video',
+            //   },
+            //   {
+            //       name: "National geographic",
+            //       url: 'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/',
+            //   },
+            //   {
+            //       name: "Craigslist",
+            //       url: 'http://sfbay.craigslist.org/eng/index.rss',
+            //   },
+            //   {
+            //       name: "Slate",
+            //       url: 'http://www.slate.com/blogs/trending.fulltext.all.10.rss'
+            //   }
+            // ];
 
-            scope.rss_list = data;
+            scope.rss_list = feedManage.getFeeds('feed');
 
-            scope.delete = function(url) {
-              var index = getRssObjIndex(scope.rss_list, url);
-              scope.rss_list.splice(index, 1);
-
-              //Todo: somehow save rss_list
+            scope.delete = function(id)
+              feedManage.removeFeed('feed', id);
             }
 
-            scope.edit = function(url) {
+            scope.edit = function(url, id) {
               if (!scope.current_edit || scope.current_edit.url != url) {
                 var index = getRssObjIndex(scope.rss_list, url);
                 scope.current_edit = {
@@ -55,9 +52,8 @@
                   name: scope.rss_list[index].name
                 };
               } else {
+                feedManage.saveFeed('feed', id, scope.current_edit);
                 scope.current_edit = false;
-
-                //Todo: somehow save rss_list
               }
             }
 
@@ -67,10 +63,13 @@
                 url: scope.url
               });
 
+              feedManage.addFeed('feed', {
+                name: scope.name,
+                url: scope.url
+              });
+
               scope.name = '';
               scope.url = '';
-
-              //Todo: somehow save rss_list
             }
 
             function getRssObjIndex(list, url) {

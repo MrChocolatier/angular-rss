@@ -75,7 +75,7 @@ pipes.buildIndexFile = function() {
  = = = */
 // Copy all the scripts from the bower_components and then moves to DEV directory
 pipes.builtVendorScriptsDev = function() {
-  return gulp.src(bowerFiles())
+  return gulp.src(bowerFiles('**/*.js'))
     .pipe(gulp.dest(paths.distDev + '/bower_components'));
 };
 // Built App Script and then moves to DEV directory
