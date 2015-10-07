@@ -41,18 +41,24 @@
             scope.rss_list = data;
 
             scope.delete = function(url) {
-              var index;
-              scope.rss_list.some(function(entry, i) {
-                if (entry.url === url) {
-                    index = i;
-                    return true;
-                }
-              });
-
+              var index = getRssObjIndex(scope.rss_list, url);
               scope.rss_list.splice(index, 1);
+
+              //Todo: somehow save rss_list
             }
 
             scope.edit = function(url) {
+              if (!scope.current_edit || scope.current_edit.url != url) {
+                var index = getRssObjIndex(scope.rss_list, url);
+                scope.current_edit = {
+                  url: scope.rss_list[index].url,
+                  name: scope.rss_list[index].name
+                };
+              } else {
+                scope.current_edit = false;
+
+                //Todo: somehow save rss_list
+              }
             }
 
             scope.add = function(url) {
@@ -63,6 +69,20 @@
 
               scope.name = '';
               scope.url = '';
+
+              //Todo: somehow save rss_list
+            }
+
+            function getRssObjIndex(list, url) {
+              var index;
+              list.some(function(entry, i) {
+                if (entry.url === url) {
+                    index = i;
+                    return true;
+                }
+              });
+
+              return index;
             }
         }
       }

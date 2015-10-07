@@ -1,0 +1,16 @@
+.manage-tbl {
+  width: 100%;
+
+  input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.2em 0.5em;
+  }
+
+  td:first-child {
+    width: 30%;
+  }
+  td:last-child {
+    width: 150px;
+  }
+}

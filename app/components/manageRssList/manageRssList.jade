@@ -6,14 +6,18 @@ table(class="manage-tbl")
       input(ng-model="url")
     td
       span(class="btn" ng-click="(name && url)? add(): void(0)")
-        | Add
+        | + Add
   tr(ng-repeat="entry in rss_list")
     td
-      | {{entry.name}}
+      span(ng-if="current_edit.url != entry.url")
+        | {{entry.name}}
+      input(ng-model="current_edit.name" ng-if="current_edit.url == entry.url")
     td
-      | {{entry.url}}
+      span(ng-if="current_edit.url != entry.url")
+        | {{entry.url}}
+      input(ng-model="current_edit.url" ng-if="current_edit.url == entry.url")
     td
       span(class="btn" ng-click="delete(entry.url)")
         | Delete
-      span(class="btn")
-        | Edit
+      span(class="btn" ng-click="edit(entry.url)")
+        | {{(current_edit.url == entry.url ? 'Save' : 'Edit')}}
