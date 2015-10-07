@@ -6,7 +6,8 @@
     .module('app', [
       'ui.router',
       'RSS.Feeds',
-      'ngSanitize'
+      'ngSanitize',
+      'app.about'
     ])
     .config(appConfig);
 

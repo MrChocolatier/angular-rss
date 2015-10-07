@@ -1,0 +1,19 @@
+table(class="manage-tbl")
+  tr
+    td
+      input(ng-model="name")
+    td
+      input(ng-model="url")
+    td
+      span(class="btn" ng-click="(name && url)? add(): void(0)")
+        | Add
+  tr(ng-repeat="entry in rss_list")
+    td
+      | {{entry.name}}
+    td
+      | {{entry.url}}
+    td
+      span(class="btn" ng-click="delete(entry.url)")
+        | Delete
+      span(class="btn")
+        | Edit

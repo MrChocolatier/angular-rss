@@ -17,4 +17,18 @@ body {
   @include phone {
     font-size: 12px;
   }
+
+  .sidebar {
+    @include grid-span(3, 1);
+    @include tablet {
+      @include grid-span(6, 3);
+    }
+  }
+
+  .content {
+    @include grid-span(9, 4);
+    @include tablet {
+      @include grid-span(6, 3);
+    }
+  }
 }

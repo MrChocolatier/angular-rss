@@ -16,5 +16,16 @@
   @include background-grid($color: #ccc);
 }
 
+.btn {
+  display: inline-block;
+  padding: 0.2em 0.5em;
+  cursor: pointer;
 
+  &:hover {
+    background-color: #e5e5e5;
+  }
 
+  &:active {
+    background-color: #d5d5d5;
+  }
+}
