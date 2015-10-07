@@ -20,9 +20,19 @@
     $stateProvider
       .state('home', {
         url: '/',
-        templateUrl: 'components/home.html',
-        controller: homeCtrlFn,
-        controllerAs: 'hc'
+        views: {
+          "headerView": {
+            templateUrl: "components/header/header.html"
+          },
+          "manageRssView": {
+            templateUrl: "components/manageRssList/manage.html"
+          },
+          "rssFeedView": {
+            templateUrl: "components/rssFeed/feed.html",
+            controller: homeCtrlFn,
+            controllerAs: 'hc'
+          }
+        }
       });
   }
 

@@ -7,6 +7,9 @@ html(ng-app='app')
     // endinject
   body
     ui-view
+      div(ui-view="headerView")
+      div(ui-view="manageRssView")
+      div(ui-view="rssFeedView")
     script(src='https://www.google.com/jsapi')
     // bower:js
     // endinject
