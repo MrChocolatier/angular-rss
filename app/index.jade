@@ -3,12 +3,13 @@ html(ng-app='app')
   head
     meta(charset='UTF-8')
     title Angular + Gulp
+    link(rel="icon" type="image/png" sizes="16x16" href="/img/favicon.png")
     // inject:css
     // endinject
   body
     ui-view
       div(ui-view="headerView")
-      div(ui-view="manageRssView")
+      div(ui-view="menuView")
       div(ui-view="rssFeedView")
     script(src='https://www.google.com/jsapi')
     // bower:js

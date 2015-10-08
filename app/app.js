@@ -10,10 +10,7 @@
       'app.about',
       'firebase'
     ])
-    .config(appConfig)
-    .value("firebaseUrl", "https://rss-feed.firebaseio.com/")
-    .service('fire', fireFn)
-    .factory('feedManage', feedManageFn);
+    .config(appConfig);
 
   // @ngInject
   function appConfig($stateProvider, $urlRouterProvider) {
@@ -28,8 +25,8 @@
           "headerView": {
             templateUrl: "components/header/header.html"
           },
-          "manageRssView": {
-            templateUrl: "components/manageRssList/manage.html"
+          "menuView": {
+            templateUrl: "components/rssList/menu.html"
           },
           "rssFeedView": {
             templateUrl: "components/rssFeed/feed.html",
@@ -41,7 +38,7 @@
   }
 
   //@ngInject
-  function homeCtrlFn(rssFactory, feedManage) {
+  function homeCtrlFn(feedsFactory, feedManage) {
     var vm = this;
     console.log('=== Home Controller ===');
 
@@ -55,50 +52,11 @@
       'http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml'
     ];
 
-    vm.fire = feedManage.getFeeds('feed');
-    feedManage.addFeed('feed');
+    // vm.fire = feedManage.getFeeds('feed');
+    // feedManage.addFeed('feed');
 
-    rssFactory.getRss(feedList[1]).then(function(result) {
+    feedsFactory.getRss(feedList[1]).then(function(result) {
       vm.rssFirst = result;
     });
-  }
-
-  //@ngInject
-  function fireFn(firebaseUrl) {
-    var ref = new Firebase(firebaseUrl);
-
-    this.getRef = ref;
-  }
-
-  //@ngInject
-  function feedManageFn(fire, $firebaseObject, $firebaseArray) {
-    var obj = {};
-    var ref = fire.getRef;
-
-    obj.getFeeds = function(_name) {
-      var fbObjs = $firebaseArray(ref.child(_name));
-
-      return fbObjs;
-    }
-
-    obj.addFeed = function(_name, _obj) {
-      var list = $firebaseArray(ref.child(_name));
-
-      list.$add(_obj);
-    }
-
-    obj.removeFeed = function(_name, _id) {
-      return $firebaseObject(ref.child(_name).child(_id)).$remove();
-    }
-
-    obj.saveFeed = function(_name, _id, _params) {
-      var fbObj = $firebaseObject(ref.child(_name).child(_id));
-
-      fbObj.name = _params.name;
-      fbObj.url = _params.url;
-      fbObj.$save();
-    }
-
-    return obj;
   }
 })();
