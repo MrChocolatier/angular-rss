@@ -6,14 +6,15 @@
     .directive('rssList', rssListFn);
 
     //@ngInject
-    function rssListFn(manageRssList) {
+    function rssListFn(manageRssList, dataShare) {
       return {
         templateUrl: 'components/rssList/rssList.html',
         link: function(scope, element, attrs) {
-            scope.rss_list = manageRssList.getRssList();
+            scope.rssList = manageRssList.getRssList();
+            scope.dataShare = dataShare;
 
-            scope.add = function(url) {
-              manageRssList.addRss({
+            scope.add = function() {
+              scope.rssList = manageRssList.addRss({
                 name: scope.name,
                 url: scope.url
               });
@@ -23,20 +24,25 @@
             }
 
             scope.delete = function(id) {
-              manageRssList.deleteRss(id);
+              scope.rssList = manageRssList.deleteRss(id);
             }
 
             scope.edit = function(url, id) {
               if (!scope.current_edit || scope.current_edit.url != url) {
-                var index = getRssObjIndex(scope.rss_list, url);
+                var index = getRssObjIndex(scope.rssList, url);
                 scope.current_edit = {
-                  url: scope.rss_list[index].url,
-                  name: scope.rss_list[index].name
+                  url: scope.rssList[index].url,
+                  name: scope.rssList[index].name
                 };
               } else {
-                manageRssList.editRss(id, scope.current_edit);
+                scope.rssList = manageRssList.editRss(id, scope.current_edit);
                 scope.current_edit = false;
               }
+            }
+
+            scope.select = function(feed) {
+              // manageRssList.selectRss(url);
+              dataShare.feed = feed;
             }
 
             function getRssObjIndex(list, url) {
