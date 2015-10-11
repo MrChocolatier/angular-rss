@@ -23,4 +23,7 @@
     background-color: #eee;
   }
 
+  tr:first-child:hover td {
+    background-color: transparent;
+  }
 }

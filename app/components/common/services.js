@@ -34,7 +34,8 @@
         getFeeds: getFeeds,
         getFeedContent: getFeedContent,
         removeFeed: removeFeed,
-        saveFeed: saveFeed
+        saveFeed: saveFeed,
+        selectedFeed: selectedFeed
       };
 
       var ref = fire.getRef;
@@ -46,7 +47,7 @@
 
         // list.$add(_obj);
 
-        localStorage.setRss(_obj);
+        return localStorage.setRss(_obj);
       }
 
       function getFeeds(_name) {
@@ -66,20 +67,24 @@
       function removeFeed(_name, _id, _url) {
         // return $firebaseObject(ref.child(_name).child(_id)).$remove();
 
-        localStorage.deleteRss(_url);
+        return localStorage.deleteRss(_url);
       }
 
-      function saveFeed(_name, _id, _params) {
+      function saveFeed(_name, _id, _oldUrl, _params) {
         // var fbObj = $firebaseObject(ref.child(_name).child(_id));
 
         // fbObj.name = _params.name;
         // fbObj.url = _params.url;
         // fbObj.$save();
 
-        localStorage.setRss({
+        return localStorage.setRss({
           name: _params.name,
           url: _params.url
-        });
+        }, _oldUrl);
+      }
+
+      function selectedFeed(_rss) {
+        return localStorage.selectedFeed(_rss);
       }
     }
 

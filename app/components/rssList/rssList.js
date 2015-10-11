@@ -12,6 +12,7 @@
         link: function(scope, element, attrs) {
             scope.rssList = manageRssList.getRssList();
             scope.dataShare = dataShare;
+            dataShare.feed = manageRssList.selectedRss();
 
             scope.add = function() {
               scope.rssList = manageRssList.addRss({
@@ -23,25 +24,29 @@
               scope.url = '';
             }
 
-            scope.delete = function(id) {
-              scope.rssList = manageRssList.deleteRss(id);
+            scope.delete = function(id, url) {
+              scope.rssList = manageRssList.deleteRss(id, url);
             }
 
             scope.edit = function(url, id) {
-              if (!scope.current_edit || scope.current_edit.url != url) {
+              if (scope.oldUrl) {
+                // save
+                scope.rssList = manageRssList.editRss(id, scope.oldUrl, scope.current_edit);
+                scope.current_edit = false;
+                scope.oldUrl = null;
+              } else {
+                // edit
                 var index = getRssObjIndex(scope.rssList, url);
                 scope.current_edit = {
                   url: scope.rssList[index].url,
                   name: scope.rssList[index].name
                 };
-              } else {
-                scope.rssList = manageRssList.editRss(id, scope.current_edit);
-                scope.current_edit = false;
+                scope.oldUrl = url;
               }
             }
 
             scope.select = function(feed) {
-              // manageRssList.selectRss(url);
+              manageRssList.selectedRss(feed);
               dataShare.feed = feed;
             }
 

@@ -18,27 +18,27 @@
           deleteRss: deleteRss,
           editRss: editRss,
           getRssList: getRssList,
-          selectRss: selectRss
+          selectedRss: selectedRss
         }
 
         function addRss(rssObj) {
-          feedManage.addFeed(firebaseType, rssObj);
+          return feedManage.addFeed(firebaseType, rssObj);
         }
 
-        function deleteRss(id) {
-          feedManage.removeFeed(firebaseType, id);
+        function deleteRss(id, url) {
+          return feedManage.removeFeed(firebaseType, id, url);
         }
 
-        function editRss(id, rssObj) {
-          feedManage.saveFeed(firebaseType, id, rssObj);
+        function editRss(id, oldUrl, rssObj) {
+          return feedManage.saveFeed(firebaseType, id, oldUrl, rssObj);
         }
 
         function getRssList() {
           return feedManage.getFeeds(firebaseType);
         }
 
-        function selectRss(url) {
-          dataShare.feed.url = url;
+        function selectedRss(rss) {
+          return feedManage.selectedFeed(rss);
         }
       }
     }

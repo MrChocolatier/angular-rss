@@ -35,15 +35,16 @@
         }
       }
 
-      storage.setRss = function(rss) {
+      storage.setRss = function(newRss, url) {
         var rssList = storage.getRssList();
         if (rssList) {
-          findRss(rssList, rss.url, rss);  // url as id
-        } else {
-          rssList.push(rss);
+          if (url) {
+            findRss(rssList, url, newRss);
+          } else {
+            rssList.push(newRss);
+          }
+          return storage.setRssList(rssList);
         }
-
-        storage.setRssList(rssList);
       }
 
       storage.getRss = function(url) {
@@ -58,8 +59,22 @@
         if (rssList) {
           var ind = findRss(rssList, url).index;
 
-          rssList.splice(index, 1);
-          storage.setRssList(rssList);
+          rssList.splice(ind, 1);
+          return storage.setRssList(rssList);
+        }
+      }
+
+      storage.selectedFeed = function(rss) {
+        if (storageAvailable('localStorage')) {
+          if (rss) {
+            $window.localStorage.setItem('rss_selectedFeed', JSON.stringify(rss));
+            return true;
+          } else {
+            return JSON.parse($window.localStorage.getItem('rss_selectedFeed'));
+          }
+        } else {
+          console.error('localStorage in unavailable!')
+          return false;
         }
       }
 
@@ -67,19 +82,16 @@
         var rss;
         var ind;
 
-        rssList.some(function(entry, i) {
-          if (newRss)
-            if (entry.url === url) {
-                entry = newRss;
-                rss = entry;
-                return true;
+        rssList.some(function(entry, i, array) {
+          if (entry.url === url) {
+            if (newRss) {
+              array[i] = newRss;
+              rss = entry;
+            } else {
+              rss = entry;
+              ind = i;
             }
-          else
-            if (entry.url === url) {
-                rss = entry;
-                ind = i;
-                return true;
-            }
+          }
         });
 
         return {
