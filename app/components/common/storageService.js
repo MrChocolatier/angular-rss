@@ -2,15 +2,15 @@
   'use strict';
 
   angular
-    .module('RSS.Feeds')
+    .module('localStorage.factory', [])
     .constant("localStorageKey", "rss")
-    .service('localStorage', localStorageFn);
+    .factory('localStorage', localStorageFn);
 
-    //#ngInject
+    //@ngInject
     function localStorageFn($window) {
-      var storage = this;
+      var obj = {};
 
-      storage.setRssList = function(rssList) {
+      obj.setRssList = function(rssList) {
         if (storageAvailable('localStorage')) {
           $window.localStorage.setItem('rss', JSON.stringify(rssList));
           return rssList;
@@ -20,7 +20,7 @@
         }
       }
 
-      storage.getRssList = function() {
+      obj.getRssList = function() {
         if (storageAvailable('localStorage')) {
           var rss = $window.localStorage.getItem('rss');
 
@@ -35,36 +35,36 @@
         }
       }
 
-      storage.setRss = function(newRss, url) {
-        var rssList = storage.getRssList();
+      obj.setRss = function(newRss, url) {
+        var rssList = obj.getRssList();
         if (rssList) {
           if (url) {
             findRss(rssList, url, newRss);
           } else {
             rssList.push(newRss);
           }
-          return storage.setRssList(rssList);
+          return obj.setRssList(rssList);
         }
       }
 
-      storage.getRss = function(url) {
-        var rssList = storage.getRssList();
+      obj.getRss = function(url) {
+        var rssList = obj.getRssList();
         if (rssList) {
           return findRss(rssList, url).rss;
         }
       }
 
-      storage.deleteRss = function(url) {
-        var rssList = storage.getRssList();
+      obj.deleteRss = function(url) {
+        var rssList = obj.getRssList();
         if (rssList) {
           var ind = findRss(rssList, url).index;
 
           rssList.splice(ind, 1);
-          return storage.setRssList(rssList);
+          return obj.setRssList(rssList);
         }
       }
 
-      storage.selectedFeed = function(rss) {
+      obj.selectedFeed = function(rss) {
         if (storageAvailable('localStorage')) {
           if (rss) {
             $window.localStorage.setItem('rss_selectedFeed', JSON.stringify(rss));
@@ -104,8 +104,8 @@
         try {
       		var storage = window[type],
       			x = '__storage_test__';
-      		storage.setItem(x, x);
-      		storage.removeItem(x);
+      		obj.setItem(x, x);
+      		obj.removeItem(x);
       		return true;
       	}
       	catch(e) {
@@ -113,5 +113,6 @@
       	}
       }
 
+      return obj;
     }
 })();

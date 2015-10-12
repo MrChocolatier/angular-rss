@@ -1,6 +1,13 @@
-h1
-  | RSS home page
+.add-feed-row
+  .col-4
+    input(type='text', placeholder='Name RSS Feed')
+  .col-6
+    input(type='text', placeholder='Url RSS Feed')
+  .col-2
+    a.btn(href='')
+      | Add Feed
 hr
+rss-feed(list="array")
 div(manage-rss-list)
   div(ng-repeat='item in hc.rssFirst')
     h2

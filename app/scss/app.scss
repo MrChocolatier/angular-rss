@@ -1,3 +1,4 @@
+@import "normalize";
 @import "compass";
 @import "singularitygs";
 
@@ -6,28 +7,14 @@
 @import "adjustment/mixins";
 @import "adjustment/media";
 @import "adjustment/layouts";
+@import "adjustment/btn";
 
 /* ----- sections ----- */
 @import "sections/main-page";
+@import "sections/home";
 
 @include sgs-change('debug', false);
 
 .container {
   @include background-grid($color: #ccc);
-}
-
-.btn {
-  display: inline-block;
-  padding: 0.2em 0.5em;
-  cursor: pointer;
-  text-decoration: none;
-  color: $base-text-color;
-
-  &:hover {
-    background-color: #e5e5e5;
-  }
-
-  &:active {
-    background-color: #d5d5d5;
-  }
 }

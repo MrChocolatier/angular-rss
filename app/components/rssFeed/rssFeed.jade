@@ -1,3 +1,6 @@
+ul
+  li(ng-repeat='item in list track by $index')
+    | {{item}}
 h2
   | {{data.feed.name}}
 div(ng-repeat='item in feedContent')

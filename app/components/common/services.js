@@ -3,32 +3,13 @@
 
   angular
     .module('RSS.Feeds')
-    .constant("firebaseUrl", "https://rss-feed.firebaseio.com/")
     .constant("firebaseType", "feed")
-    .service('fire', fireFn)
-    .service('dataShare', dataShareFn)
     .factory('feedsFactory', feedsFactoryFn)
     .factory('feedManage', feedManageFn);
 
     //@ngInject
-    function dataShareFn() {
-      var share = this;
-
-      share.feed = {
-          url: '',
-          name: ''
-      };
-    }
-
-    //@ngInject
-    function fireFn(firebaseUrl) {
-      var ref = new Firebase(firebaseUrl);
-
-      this.getRef = ref;
-    }
-
-    //@ngInject
-    function feedManageFn(fire, feedsFactory, $firebaseObject, $firebaseArray, localStorage) {
+    function feedManageFn(DBC, feedsFactory, $firebaseObject, $firebaseArray, localStorage) {
+      var ref = DBC.getRef;
       var obj = {
         addFeed: addFeed,
         getFeeds: getFeeds,
@@ -37,10 +18,6 @@
         saveFeed: saveFeed,
         selectedFeed: selectedFeed
       };
-
-      var ref = fire.getRef;
-
-      return obj;
 
       function addFeed(_name, _obj) {
         // var list = $firebaseArray(ref.child(_name));
@@ -86,6 +63,8 @@
       function selectedFeed(_rss) {
         return localStorage.selectedFeed(_rss);
       }
+
+      return obj;
     }
 
     //@ngInject

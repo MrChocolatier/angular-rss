@@ -98,7 +98,7 @@ pipes.builtStylesDev = function() {
           css: paths.distDevCss,
           sass: './app/scss/',
           image: './app/img/',
-          require: ['compass', 'singularitygs']
+          require: ['compass', 'singularitygs', 'normalize-scss']
       }))
       .pipe(plugins.cssUrlAdjuster({
         replace:  ['../../app/img','../img/'] //When we use sprite we have wrong path for our sprite, this is fixed

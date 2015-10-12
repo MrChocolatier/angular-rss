@@ -1,3 +1,57 @@
+.wrap {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+}
+.header {
+
+}
+.main {
+  @include clearfix;
+}
+.menu {
+  @include grid-span(3, 1);
+}
+.menu {
+  @include grid-span(3, 1);
+}
+.sidebar {
+  @include grid-span(3, 1);
+}
+.content {
+  @include grid-span(9, 4);
+}
+.add-feed-row {
+  @include clearfix;
+  .col-4 {
+    @include float-span(4, $gutter: 0);
+    padding: 0 16px;
+  }
+  .col-6 {
+    @include float-span(6, $gutter: 0);
+    padding: 0 16px;
+  }
+  .col-2 {
+    @include float-span(2, $gutter: 0);
+    padding: 0 16px;
+    .btn {
+      margin-top: 8px;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 .manage-tbl {
   width: 100%;
   border-collapse: collapse;
