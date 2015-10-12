@@ -7,7 +7,7 @@
     a.btn(href='')
       | Add Feed
 hr
-rss-feed(list="array")
+rss-feed(feed-data="feedData" url-array="urlArray" add-url="addUrl()" remove-url="removeUrl()")
 div(manage-rss-list)
   div(ng-repeat='item in hc.rssFirst')
     h2

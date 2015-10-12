@@ -10,11 +10,12 @@
       return {
         templateUrl: 'components/rssFeed/rssFeed.html',
         scope: {
-          listFeed: '=list'
+          feedData: '=',
+          urlArray: '=',        // test
+          addUrl: '&',          // test
+          removeUrl: '&'        // test
         },
         link: function(scope, element, attrs, ctrl) {
-          scope.list = scope.listFeed;
-          var options = {};
           // var url = 'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/';
           // scope.data = dataShare;
           //

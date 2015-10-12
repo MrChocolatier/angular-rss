@@ -1,9 +1,12 @@
-ul
-  li(ng-repeat='item in list track by $index')
-    | {{item}}
+button(ng-click="addUrl()")
+  | Add url
+button(ng-click="removeUrl()")
+  | Remove url
+p
+  | {{urlArray}}
 h2
   | {{data.feed.name}}
-div(ng-repeat='item in feedContent')
+div(ng-repeat='item in feedData')
   h2
     | {{item.author}}
   div(ng-bind-html='item.content')
