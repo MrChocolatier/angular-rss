@@ -21,9 +21,9 @@
       }
 
       obj.getRssList = function() {
+        console.log('= getRssList =');
         if (storageAvailable('localStorage')) {
           var rss = $window.localStorage.getItem('rss');
-
           if (rss && rss != 'undefined')
             return JSON.parse(rss);
           else
@@ -37,12 +37,14 @@
 
       obj.setRss = function(newRss, url) {
         var rssList = obj.getRssList();
+        // console.log("= setRss =", obj.getRssList());
+        // console.log($window.localStorage.getItem('rss'));
         if (rssList) {
-          if (url) {
-            findRss(rssList, url, newRss);
-          } else {
+          // if (url) {
+          //   findRss(rssList, url, newRss);
+          // } else {
             rssList.push(newRss);
-          }
+          // }
           return obj.setRssList(rssList);
         }
       }
@@ -104,8 +106,8 @@
         try {
       		var storage = window[type],
       			x = '__storage_test__';
-      		obj.setItem(x, x);
-      		obj.removeItem(x);
+      		storage.setItem(x, x);
+      		storage.removeItem(x);
       		return true;
       	}
       	catch(e) {

@@ -1,13 +1,13 @@
 .add-feed-row
   .col-4
-    input(type='text', placeholder='Name RSS Feed')
+    input(type='text', placeholder='Name RSS Feed', ng-model="data.name")
   .col-6
-    input(type='text', placeholder='Url RSS Feed')
+    input(type='text', placeholder='Url RSS Feed',  ng-model="data.url")
   .col-2
-    a.btn(href='')
+    a.btn(href='', ng-click="hc.addRss(data)")
       | Add Feed
 hr
-rss-feed(list="array")
+
 div(manage-rss-list)
   div(ng-repeat='item in hc.rssFirst')
     h2

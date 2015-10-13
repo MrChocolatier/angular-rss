@@ -18,13 +18,15 @@
     };
 
     //@ngInject
-    function homeCtrlFn($scope) {
+    function homeCtrlFn($scope, localStorage) {
       console.log('=== Home Controller ===');
       var vm = this;
 
-      $scope.array = ['one', 'two']
-      vm.clickMe = function() {
-        alert('click');
+      $scope.array = ['one', 'two'];
+      vm.addRss = function(_obj) {
+        console.log('== addRss ==', _obj);
+        console.log(localStorage.setRss(_obj));
+        //localStorage.setRss(_obj);
       }
       // console.log('=== Home Controller ===');
       //
