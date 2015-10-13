@@ -10,10 +10,7 @@
       return {
         templateUrl: 'components/rssFeed/rssFeed.html',
         scope: {
-          feedData: '=',
-          urlArray: '=',        // test
-          addUrl: '&',          // test
-          removeUrl: '&'        // test
+          feedData: '='
         },
         link: function(scope, element, attrs, ctrl) {
         }

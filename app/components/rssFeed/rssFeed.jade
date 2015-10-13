@@ -1,12 +1,4 @@
-button.btn(ng-click="addUrl()")
-  | Add url
-button.btn(ng-click="removeUrl()")
-  | Remove url
-p
-  | {{urlArray}}
-h2
-  | {{data.feed.name}}
-div(ng-repeat='item in feedData | orderBy: "publishedDate"')
+div(ng-repeat='item in feedData | orderBy: "-publishedDate"')
   h2
     | {{item.author}}
   div(ng-bind-html='item.content')

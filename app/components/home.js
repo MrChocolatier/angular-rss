@@ -25,22 +25,16 @@
     //@ngInject
     function homeCtrlFn($scope, dataShare, displayRssFeed, feedManage) {
       console.log('=== Home Controller ===');
+      var log = [];
       var vm = this;
 
-      //TODO:START: Test feed urls, when finished delete this blocks
-      $scope.urlArray = ['http://feeds.feedburner.com/TEDTalks_video', 'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/'];
-
-      $scope.addUrl = function() {
-        $scope.urlArray.push("http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/?time=" + new Date().getTime());
-      }
-
-      $scope.removeUrl = function() {
-        $scope.urlArray.pop();
-      }
-
-      // feedManage.getFeeds();
-      //TODO:END
-
+      feedManage.getFeeds('feed').then(function(result) {
+          var values = result;
+          angular.forEach(values, function(value, key) {
+            log.push(value.url);
+          });
+      });
+      $scope.urlArray = log;
       // feed data for rssFeed directive to render
       $scope.feedData = [];
       $scope.options = {};

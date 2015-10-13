@@ -26,15 +26,15 @@
       }
 
       function getFeeds(_name) {
-        var url = _name == _name ? ref : ref.child(_name);
-        // console.log(url);
-        var fbObjs = $firebaseArray(url);
-        return fbObjs;
+        var url = _name ? ref.child(_name) : ref;
+        var fbObjs = $firebaseArray(ref.child(_name));
+
+        return fbObjs.$loaded();
       }
 
       function getFeedContent(_name, _url, _params) {
         var fbObj = $firebaseObject(ref.child(_name));
-        
+
         return fbObj;
       }
 
