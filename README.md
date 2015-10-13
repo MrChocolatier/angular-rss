@@ -1,5 +1,5 @@
-# Angular + Gulp: Fast built
-![AngularJS plus Gulp](cover.jpg)
+# RSS Feeds
+
 ## Installation
 
 Before running any Gulp tasks:
@@ -8,26 +8,6 @@ Before running any Gulp tasks:
 2. Ensure you have **node** installed
 4. Almost, ensure you have **ruby**, **compass** and **singularitygs** installed
 3. Run `npm install` and `bower install` in the root directory
-
-## Project Structure
-
-The project ships with a directory structure like:
-
-    /angular-gulp
-    |---- package.json
-    |---- bower.json
-    |---- gulpfile.js
-    |---- /app
-    |     |---- index.jade
-    |     |---- app.js
-    |     |---- /scss
-    |     |     |---- app.scss
-    |           ...
-    |     |---- /components
-    |           |
-    |           ...
-    |---- (/dist.dev)
-    |---- (/dist.prod)
     
 ## Gulp Tasks
 
