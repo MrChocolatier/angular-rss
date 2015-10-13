@@ -6,6 +6,7 @@
     .module('app', [
       'ui.router',
       'ngSanitize',
+      'localStorage.factory',
       'dataShare.service',
       'RSS.Feeds',
       'RSS.Feeds.directive',
@@ -23,5 +24,4 @@
     $urlRouterProvider.otherwise('/');
 
   }
-
 })();

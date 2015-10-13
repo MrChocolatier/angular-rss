@@ -22,7 +22,7 @@
       console.log('=== Home Controller ===');
       var vm = this;
 
-      // test feed urls
+      //TODO:START: Test feed urls, when finished delete this blocks
       $scope.urlArray = ['http://feeds.feedburner.com/TEDTalks_video', 'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/'];
 
       $scope.addUrl = function() {
@@ -32,6 +32,7 @@
       $scope.removeUrl = function() {
         $scope.urlArray.pop();
       }
+      //TODO:END
 
       // feed data for rssFeed directive to render
       $scope.feedData = [];
