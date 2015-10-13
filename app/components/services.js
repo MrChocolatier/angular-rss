@@ -3,6 +3,7 @@
 
   angular
     .module('RSS.Feeds', [])
+    .constant("firebaseType", "feed")
     .provider('manageRssList', manageRssListFn)
     .provider('displayRssFeed', displayRssFeedFn);
 
@@ -45,18 +46,21 @@
 
     //@ngInject
     function displayRssFeedFn(firebaseType) {
-      return {
+      var o = {
         $get: $get
       }
 
-      function $get(feedManage) {
-        return {
+      function $get(feedManage, googleFactory) {
+        var obj = {
           showFeed: showFeed
         }
 
         function showFeed(url, options) {
-          return feedManage.getFeedContent(firebaseType, url, options);
+          return googleFactory.getRss(url);
         }
+
+        return obj;
       }
+      return o;
     }
 })();

@@ -6,8 +6,10 @@
     .module('app', [
       'ui.router',
       'ngSanitize',
-      'localStorage.factory',
       'dataShare.service',
+      'localStorage.factory',
+      'feedManage.factory',
+      'google.factory',
       'RSS.Feeds',
       'RSS.Feeds.directive',
       'app.home',

@@ -23,7 +23,7 @@
     };
 
     //@ngInject
-    function homeCtrlFn($scope, dataShare, displayRssFeed) {
+    function homeCtrlFn($scope, dataShare, displayRssFeed, feedManage) {
       console.log('=== Home Controller ===');
       var vm = this;
 
@@ -37,6 +37,8 @@
       $scope.removeUrl = function() {
         $scope.urlArray.pop();
       }
+
+      // feedManage.getFeeds();
       //TODO:END
 
       // feed data for rssFeed directive to render
