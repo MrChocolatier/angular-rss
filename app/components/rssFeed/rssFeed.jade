@@ -6,7 +6,7 @@ p
   | {{urlArray}}
 h2
   | {{data.feed.name}}
-div(ng-repeat='item in feedData')
+div(ng-repeat='item in feedData | orderBy: "publishedDate"')
   h2
     | {{item.author}}
   div(ng-bind-html='item.content')

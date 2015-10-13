@@ -42,6 +42,9 @@
           if ($scope.feedData.length === 0)  {  // initial function run
             newArray.forEach(function(el) {
               displayRssFeed.showFeed(el, $scope.options).then(function(result) {
+                  result.forEach(function(el) {
+                    el.publishedDate = new Date(el.publishedDate);
+                  })
                   $scope.feedData = $scope.feedData.concat(result);
               });
             })
@@ -49,6 +52,9 @@
             if (newArray.length <= oldArray.length) {   // if url was deleted or modified
               newArray.forEach(function(el) {
                 displayRssFeed.showFeed(el, $scope.options).then(function(result) {
+                    result.forEach(function(el) {
+                      el.publishedDate = new Date(el.publishedDate);
+                    })
                     $scope.feedData = result;
                 });
               })
@@ -59,6 +65,9 @@
 
               newUrls.forEach(function(el) {
                 displayRssFeed.showFeed(el, $scope.options).then(function(result) {
+                    result.forEach(function(el) {
+                      el.publishedDate = new Date(el.publishedDate);
+                    })
                     $scope.feedData = $scope.feedData.concat(result);
                 });
               })
@@ -66,23 +75,5 @@
           }
         }
       }, true)
-      // console.log('=== Home Controller ===');
-      //
-      // var feedList = [
-      //   'http://feeds.feedburner.com/TEDTalks_video',
-      //   'http://feeds.nationalgeographic.com/ng/photography/photo-of-the-day/',
-      //   'http://sfbay.craigslist.org/eng/index.rss',
-      //   'http://www.slate.com/blogs/trending.fulltext.all.10.rss',
-      //   'http://feeds.current.com/homepage/en_US.rss',
-      //   'http://feeds.current.com/items/popular.rss',
-      //   'http://www.nytimes.com/services/xml/rss/nyt/HomePage.xml'
-      // ];
-
-      // vm.fire = feedManage.getFeeds('feed');
-      // feedManage.addFeed('feed');
-
-      // feedsFactory.getRss(feedList[1]).then(function(result) {
-      //   vm.rssFirst = result;
-      // });
     }
 })();
