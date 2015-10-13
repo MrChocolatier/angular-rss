@@ -1,15 +1,17 @@
 table(class="manage-tbl")
   tr
     td
+    td
       input(ng-model="name")
     td
       input(ng-model="url")
     td
-      a(class="btn" href="#" ng-click="(name && url)? add(): void(0)")
+      a(class="btn" href="" ng-click="(name && url)? add(): void(0)")
         | + Add
   tr(ng-repeat="entry in rssList" 
-    ng-click="(current_edit.url != entry.url)? select(entry) : false"
-    ng-class="{'selected': dataShare.feed.url === entry.url}")
+    ng-click="(current_edit.url != entry.url)? select(entry) : false")
+    td
+      input(type="checkbox")
     td
       span(ng-if="!oldUrl || oldUrl !== entry.url")
         | {{entry.name}}
@@ -19,7 +21,7 @@ table(class="manage-tbl")
         | {{entry.url}}
       input(ng-model="current_edit.url" ng-if="oldUrl === entry.url")
     td
-      a(class="btn" href="#" ng-click="delete(entry.$id, entry.url)")
+      a.btn(href="#" ng-click="delete(entry.$id, entry.url)")
         | Delete
-      a(class="btn" href="#" ng-click="edit(entry.url, entry.$id)")
+      a.btn(href="#" ng-click="edit(entry.url, entry.$id)")
         | {{(oldUrl && oldUrl === entry.url ? 'Save' : 'Edit')}}

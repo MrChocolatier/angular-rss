@@ -14,11 +14,16 @@
           templateUrl: "components/home.html",
           controller: homeCtrlFn,
           controllerAs: 'hc'
+        })
+        .state('feeds', {
+          url: '/feeds',
+          templateUrl: 'components/feeds.html',
+          controller: feedsCtrlFn
         });
     };
 
     //@ngInject
-    function homeCtrlFn($scope, displayRssFeed) {
+    function homeCtrlFn($scope, dataShare, displayRssFeed) {
       console.log('=== Home Controller ===');
       var vm = this;
 
@@ -76,5 +81,10 @@
           }
         }
       }, true)
+    }
+
+    //@ngInject
+    function feedsCtrlFn() {
+
     }
 })();

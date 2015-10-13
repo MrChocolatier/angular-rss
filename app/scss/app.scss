@@ -12,6 +12,7 @@
 /* ----- sections ----- */
 @import "sections/main-page";
 @import "sections/home";
+@import "sections/feeds";
 
 @include sgs-change('debug', false);
 
