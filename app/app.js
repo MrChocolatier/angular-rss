@@ -8,8 +8,12 @@
       'ngSanitize',
       'localStorage.factory',
       'dataShare.service',
+      'RSS.Feeds',
       'RSS.Feeds.directive',
       'app.home',
+      'firebase',
+      'firebaseRef.service',
+      'localStorage.factory'
     ])
     .config(appConfig);
 
