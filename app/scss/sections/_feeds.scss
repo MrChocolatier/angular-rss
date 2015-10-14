@@ -10,6 +10,9 @@
 
   td {
     padding: 0 0.5em;
+    &.check-td {
+      width: 5%;
+    }
     &.name-td {
       width: 20%;
     }
@@ -24,7 +27,7 @@
       }
     }
     &.btn-td {
-      width: 50%;
+      width: 45%;
     }
   }
 }

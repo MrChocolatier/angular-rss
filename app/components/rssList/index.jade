@@ -10,7 +10,7 @@ table(class="manage-tbl")
       a(class="btn" href="" ng-click="rssList.$add(data); data = ''")
         | + Add
   tr(ng-repeat="entry in rssList")
-    td
+    td(class='check-td')
       input(type="checkbox", ng-model="entry.show", ng-change="rssList.$save(entry)")
     td(class='name-td')
       span(ng-show='!edit')
