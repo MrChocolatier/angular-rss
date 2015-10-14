@@ -35,22 +35,9 @@
             //  scope.rssList = manageRssList.deleteRss(id, url);
             //}
             //
-            //scope.edit = function(url, id) {
-            //  if (scope.oldUrl) {
-            //    // save
-            //    scope.rssList = manageRssList.editRss(id, scope.oldUrl, scope.current_edit);
-            //    scope.current_edit = false;
-            //    scope.oldUrl = null;
-            //  } else {
-            //    // edit
-            //    var index = getRssObjIndex(scope.rssList, url);
-            //    scope.current_edit = {
-            //      url: scope.rssList[index].url,
-            //      name: scope.rssList[index].name
-            //    };
-            //    scope.oldUrl = url;
-            //  }
-            //}
+          scope.edit = function(_obj) {
+            console.log(_obj);
+          };
             //
             //scope.select = function(feed) {
             //  manageRssList.selectedRss(feed);

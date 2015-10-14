@@ -1,27 +1,29 @@
 table(class="manage-tbl")
   tr
     td
+      input(type="checkbox", ng-model='data.show', ng-checked='data.show = true', ng-hide='data.show')
     td
-      input(ng-model="name")
+      input(ng-model="data.name")
     td
-      input(ng-model="url")
+      input(ng-model="data.url")
     td
-      a(class="btn" href="" ng-click="(name && url)? add(): void(0)")
+      a(class="btn" href="" ng-click="rssList.$add(data); data = ''")
         | + Add
-  tr(ng-repeat="entry in rssList" 
-    ng-click="(current_edit.url != entry.url)? select(entry) : false")
+  tr(ng-repeat="entry in rssList")
     td
       input(type="checkbox", ng-model="entry.show", ng-change="rssList.$save(entry)")
-    td
-      span(ng-if="!oldUrl || oldUrl !== entry.url")
+    td(class='name-td')
+      span(ng-show='edit')
         | {{entry.name}}
-      input(ng-model="current_edit.name" ng-if="oldUrl === entry.url")
-    td
-      span(ng-if="!oldUrl || oldUrl !== entry.url")
+      input(ng-model="entry.name", ng-hide='edit')
+    td(class='url-td')
+      span(ng-show='edit', title="{{entry.url}}")
         | {{entry.url}}
-      input(ng-model="current_edit.url" ng-if="oldUrl === entry.url")
-    td
-      a.btn(href="#" ng-click="delete(entry.$id, entry.url)")
+      input(ng-model="entry.url", ng-hide='edit')
+    td(class='btn-td')
+      a.btn(href="" ng-click="rssList.$remove(entry)")
         | Delete
-      a.btn(href="#" ng-click="edit(entry.url, entry.$id)")
-        | {{(oldUrl && oldUrl === entry.url ? 'Save' : 'Edit')}}
+      a.btn(href="" ng-click="edit = !edit" ng-hide='!edit')
+        | Edit
+      a.btn(href="" ng-click="rssList.$save(entry); edit = !edit" ng-show='!edit')
+        | Save

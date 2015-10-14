@@ -10,11 +10,21 @@
 
   td {
     padding: 0 0.5em;
-  }
-  td:first-child {
-    width: 2em;
-  }
-  td:last-child {
-    width: 12em;
+    &.name-td {
+      width: 20%;
+    }
+    &.url-td {
+      width: 50%;
+      span {
+        display: block;
+        width: 98%;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+    }
+    &.btn-td {
+      width: 50%;
+    }
   }
 }
