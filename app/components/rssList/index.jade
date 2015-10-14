@@ -11,7 +11,7 @@ table(class="manage-tbl")
   tr(ng-repeat="entry in rssList" 
     ng-click="(current_edit.url != entry.url)? select(entry) : false")
     td
-      input(type="checkbox")
+      input(type="checkbox", ng-model="entry.show", ng-change="rssList.$save(entry)")
     td
       span(ng-if="!oldUrl || oldUrl !== entry.url")
         | {{entry.name}}

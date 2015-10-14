@@ -3,10 +3,10 @@
 
   angular
     .module('feedManage.factory', [])
-    .factory('feedManage', feedManageFn)
+    .factory('feedManage', feedManageFactory)
 
     //@ngInject
-    function feedManageFn(DBC, $firebaseObject, $firebaseArray) {
+    function feedManageFactory(DBC, $firebaseObject, $firebaseArray) {
       var ref = DBC.getRef;
 
       var obj = {
@@ -27,7 +27,7 @@
 
       function getFeeds(_name) {
         var url = _name ? ref.child(_name) : ref;
-        var fbObjs = $firebaseArray(ref.child(_name));
+        var fbObjs = $firebaseArray(url);
 
         return fbObjs.$loaded();
       }
@@ -44,17 +44,9 @@
         return localStorage.deleteRss(_url);
       }
 
-      function saveFeed(_name, _id, _oldUrl, _params) {
-        // var fbObj = $firebaseObject(ref.child(_name).child(_id));
+      function saveFeed(_name, _id, _params) {
+        var fbObj = $firebaseObject(ref.child(_name).child(_id));
 
-        // fbObj.name = _params.name;
-        // fbObj.url = _params.url;
-        // fbObj.$save();
-
-        return localStorage.setRss({
-          name: _params.name,
-          url: _params.url
-        }, _oldUrl);
       }
 
       function selectedFeed(_rss) {
