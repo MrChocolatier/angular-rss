@@ -15,7 +15,8 @@
       'app.home',
       'firebase',
       'firebaseRef.service',
-      'localStorage.factory'
+      'localStorage.factory',
+      'arrayFilter.service'
     ])
     .config(appConfig);
 
