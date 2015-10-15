@@ -16,7 +16,10 @@
 
       share.settings = {
           entriesNumber: 4,
-          includeHistoricalEntries: true
+          includeHistoricalEntries: true,
+          isEqual: function(other) {
+              return this.entriesNumber === other.entriesNumber && this.includeHistoricalEntries === other.includeHistoricalEntries;
+          }
       }
     }
 })();

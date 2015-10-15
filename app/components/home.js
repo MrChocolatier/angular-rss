@@ -15,20 +15,6 @@
             controller: homeCtrlFn,
             controllerAs: 'hc'
         })
-        // .state('home', {
-        //     url: '/',
-        //     views: {
-        //         'content': {
-        //             templateUrl: "components/home.html",
-        //             controller: homeCtrlFn,
-        //             controllerAs: 'hc'
-        //         },
-        //         'sidebar': {
-        //             templateUrl: "components/menu.html",
-        //             controller: sidebarCtrlFn
-        //         }
-        //     }
-        // })
         .state('feeds', {
             url: '/feeds',
             templateUrl: 'components/feeds.html',
@@ -41,6 +27,7 @@
         console.log('=== Home Controller ===');
         var log = [];
         var vm = this;
+        $scope.urlArray = [];
 
         feedManage.getFeeds('feed').then(function(result) {
             angular.forEach(result, function(value, key) {
@@ -48,24 +35,26 @@
                     log.push(value.url);
                 }
             });
+            $scope.urlArray = log;
         });
-        $scope.urlArray = log;
+
         // feed data for rssFeed directive to render
         $scope.feedData = [];
         $scope.settings = dataShare.settings;
 
         $scope.$on('settings:changed', function(e, data) {
             $scope.settings = data;
-            console.log(data);
         })
 
-        $scope.$watchGroup(['urlArray', 'settings'], function(newArray, oldArray) {
-            var newUrls = arrayFilter.filterNew(newArray[0], oldArray[0], $scope.feedData.length);
+        $scope.$watch('[urlArray, settings]', function(newArray, oldArray) {
+            var update = arrayFilter.filterNew(newArray, oldArray, $scope.feedData.length);
 
-            if (newArray[0].length <= oldArray[0].length)
+            // Removing old entries if setting or their urls changed
+            if (update.refresh)
                 $scope.feedData = [];
 
-            newUrls.forEach(function(el) {
+            // Getting data for each new or changed url
+            update.urls.forEach(function(el) {
                 displayRssFeed.showFeed(el, newArray[1]).then(function(result) {
                     result.forEach(function(el) {
                         el.publishedDate = new Date(el.publishedDate);
@@ -73,7 +62,7 @@
                     $scope.feedData = $scope.feedData.concat(result);
                 });
             })
-        })
+        }, true);
 
         // $scope.$watch('urlArray', function(newArray, oldArray) {
         //     var newUrls = arrayFilter.filterNew(newArray, oldArray, $scope.feedData.length);

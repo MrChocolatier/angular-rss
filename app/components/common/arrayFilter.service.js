@@ -7,15 +7,25 @@
 
     function arrayFilter(displayRssFeed) {
         this.filterNew = function(newArray, oldArray, dataLength) {
-            if (dataLength === 0)  {  // initial function run
-                return newArray;
-            } else {
-                var newUrls = newArray.filter(function(el) {
-                    return oldArray.indexOf(el) === -1;
-                });
-
-                return newUrls;
+            var update = {
+                urls: [],
+                refresh: false
             }
+
+            if (dataLength === 0)  {  // initial function run
+                update.urls = newArray[0];
+            } else {
+                if (newArray[1].isEqual(oldArray[1])) { // settings didn't change
+                    update.urls = newArray[0].filter(function(el) {
+                        return oldArray[0].indexOf(el) === -1;
+                    });
+                } else {
+                    update.urls = newArray[0];
+                    update.refresh = true;
+                }
+            }
+
+            return update;
         }
     }
 })();

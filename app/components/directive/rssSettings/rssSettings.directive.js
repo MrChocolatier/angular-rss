@@ -11,10 +11,7 @@
             scope: {},
             templateUrl: 'components/directive/rssSettings/rssSettings.html',
             controller: function($scope, $rootScope, dataShare) {
-                $scope.settings = {
-                    entriesNumber: 4,
-                    includeHistoricalEntries: true
-                }
+                $scope.settings = angular.copy(dataShare.settings);
 
                 $scope.applySettings = function() {
                     dataShare.settings = angular.copy($scope.settings);
