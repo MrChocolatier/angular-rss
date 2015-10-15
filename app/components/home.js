@@ -3,7 +3,7 @@
 
     angular
     .module('app.home', [])
-    .config(homeConfigFn)
+    .config(homeConfigFn);
 
     //@ngInject
     function homeConfigFn($stateProvider) {
@@ -15,11 +15,25 @@
             controller: homeCtrlFn,
             controllerAs: 'hc'
         })
+        // .state('home', {
+        //     url: '/',
+        //     views: {
+        //         'content': {
+        //             templateUrl: "components/home.html",
+        //             controller: homeCtrlFn,
+        //             controllerAs: 'hc'
+        //         },
+        //         'sidebar': {
+        //             templateUrl: "components/menu.html",
+        //             controller: sidebarCtrlFn
+        //         }
+        //     }
+        // })
         .state('feeds', {
             url: '/feeds',
             templateUrl: 'components/feeds.html',
             controller: feedsCtrlFn
-        });
+        })
     };
 
     //@ngInject
@@ -38,25 +52,44 @@
         $scope.urlArray = log;
         // feed data for rssFeed directive to render
         $scope.feedData = [];
-        $scope.options = {};
+        $scope.settings = dataShare.settings;
 
-        $scope.$watch('urlArray', function(newArray, oldArray) {
-            if (newArray) {
-                var newUrls = arrayFilter.filterNew(newArray, oldArray, $scope.feedData.length);
+        $scope.$on('settings:changed', function(e, data) {
+            $scope.settings = data;
+            console.log(data);
+        })
 
-                if (newArray <= oldArray)
-                    $scope.feedData = [];
+        $scope.$watchGroup(['urlArray', 'settings'], function(newArray, oldArray) {
+            var newUrls = arrayFilter.filterNew(newArray[0], oldArray[0], $scope.feedData.length);
 
-                newUrls.forEach(function(el) {
-                    displayRssFeed.showFeed(el, $scope.options).then(function(result) {
-                        result.forEach(function(el) {
-                            el.publishedDate = new Date(el.publishedDate);
-                        })
-                        $scope.feedData = $scope.feedData.concat(result);
-                    });
-                })
-            }
-        }, true)
+            if (newArray[0].length <= oldArray[0].length)
+                $scope.feedData = [];
+
+            newUrls.forEach(function(el) {
+                displayRssFeed.showFeed(el, newArray[1]).then(function(result) {
+                    result.forEach(function(el) {
+                        el.publishedDate = new Date(el.publishedDate);
+                    })
+                    $scope.feedData = $scope.feedData.concat(result);
+                });
+            })
+        })
+
+        // $scope.$watch('urlArray', function(newArray, oldArray) {
+        //     var newUrls = arrayFilter.filterNew(newArray, oldArray, $scope.feedData.length);
+        //
+        //     if (newArray.length <= oldArray.length)
+        //         $scope.feedData = [];
+        //
+        //     newUrls.forEach(function(el) {
+        //         displayRssFeed.showFeed(el, $scope.settings).then(function(result) {
+        //             result.forEach(function(el) {
+        //                 el.publishedDate = new Date(el.publishedDate);
+        //             })
+        //             $scope.feedData = $scope.feedData.concat(result);
+        //         });
+        //     })
+        // }, true)
     }
 
     //@ngInject

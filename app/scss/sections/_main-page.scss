@@ -39,3 +39,27 @@
     }
   }
 }
+
+.settings-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    input[type="number"] {
+        width: 3em;
+        margin: 0.5em;
+        text-align: center;
+    }
+
+    input[type="checkbox"],
+    input[type="radio"] {
+        margin: 0.5em;
+    }
+
+    li:last-child {
+        @include clearfix;
+    }
+    .btn {
+        float: right;
+    }
+}

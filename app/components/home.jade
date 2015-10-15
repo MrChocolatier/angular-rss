@@ -7,4 +7,5 @@
     a.btn(href='', ng-click="hc.addRss(data)")
       | Add Feed
 hr
-rss-feed(feed-data="feedData" url-array="urlArray" add-url="addUrl()" remove-url="removeUrl()")
+{{settings | json}}
+rss-feed(feed-data="feedData")

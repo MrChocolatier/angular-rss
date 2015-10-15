@@ -56,7 +56,7 @@
         }
 
         function showFeed(url, options) {
-          return googleFactory.getRss(url);
+          return googleFactory.getRss(url, options);
         }
 
         return obj;

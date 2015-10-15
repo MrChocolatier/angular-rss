@@ -13,5 +13,10 @@
           url: '',
           name: ''
       };
+
+      share.settings = {
+          entriesNumber: 4,
+          includeHistoricalEntries: true
+      }
     }
 })();

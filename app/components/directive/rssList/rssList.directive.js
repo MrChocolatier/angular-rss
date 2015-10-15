@@ -9,7 +9,7 @@
     function rssListDirective(feedManage) {
       return {
         templateUrl: 'components/directive/rssList/index.html',
-        link: function(scope, element, attrs) {
+        controller: function() {
           feedManage.getFeeds('feed').then(function(result) {
             scope.rssList = result;
           });

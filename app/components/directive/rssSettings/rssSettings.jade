@@ -1,0 +1,12 @@
+ul.settings-list
+    li
+        label(for="entriesNumber")
+            | Entries Number
+        input#entriesNumber(type="number" value="4" min="0" ng-model="settings.entriesNumber")
+    li
+        label(for="historicalEntries")
+            | Include Historical Entries
+        input#historicalEntries(type="checkbox" ng-model="settings.includeHistoricalEntries")
+    li
+        a.btn(href="" ng-click="applySettings()")
+            | Apply

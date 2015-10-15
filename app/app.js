@@ -13,10 +13,11 @@
       'localStorage.factory',
       'feedManage.factory',
       'google.factory',
+      'RSS.Feeds',
       'RSS.Feeds.directive',
       'RSS.List.directive',
-      'RSS.Feeds',
-      'app.home',
+      'RSS.Settings.directive',
+      'app.home'
     ])
     .config(appConfig);
 
