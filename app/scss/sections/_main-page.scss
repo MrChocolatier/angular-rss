@@ -63,3 +63,15 @@
         float: right;
     }
 }
+
+.feed-entry {
+    margin: 1em 0 1.5em;
+    padding: 0.5em;
+    border: 1px solid #eaeaea;
+    box-shadow: 2px 2px 0px 0px #eee;
+
+    h2 {
+        font-size: 1.4em;
+        margin-top: 0;
+    }
+}

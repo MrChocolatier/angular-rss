@@ -56,29 +56,20 @@
             // Getting data for each new or changed url
             update.urls.forEach(function(el) {
                 displayRssFeed.showFeed(el, newArray[1]).then(function(result) {
-                    result.forEach(function(el) {
+                    result.entries.forEach(function(el) {
+                        el.meta = {
+                            link: result.link,
+                            title: result.title,
+                            feedUrl: result.feedUrl,
+                            description: result.description,
+                            type: result.type
+                        };
                         el.publishedDate = new Date(el.publishedDate);
                     })
-                    $scope.feedData = $scope.feedData.concat(result);
+                    $scope.feedData = $scope.feedData.concat(result.entries);
                 });
             })
         }, true);
-
-        // $scope.$watch('urlArray', function(newArray, oldArray) {
-        //     var newUrls = arrayFilter.filterNew(newArray, oldArray, $scope.feedData.length);
-        //
-        //     if (newArray.length <= oldArray.length)
-        //         $scope.feedData = [];
-        //
-        //     newUrls.forEach(function(el) {
-        //         displayRssFeed.showFeed(el, $scope.settings).then(function(result) {
-        //             result.forEach(function(el) {
-        //                 el.publishedDate = new Date(el.publishedDate);
-        //             })
-        //             $scope.feedData = $scope.feedData.concat(result);
-        //         });
-        //     })
-        // }, true)
     }
 
     //@ngInject

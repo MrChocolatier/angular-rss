@@ -20,9 +20,8 @@
             feed.includeHistoricalEntries();
 
         var d = $q.defer();
-        //feed.setNumEntries(1);
         feed.load(function(result) {
-          $rootScope.$apply(d.resolve(result.feed.entries));
+          $rootScope.$apply(d.resolve(result.feed));
         });
         return d.promise;
       };

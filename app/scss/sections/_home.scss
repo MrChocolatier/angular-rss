@@ -1,0 +1,12 @@
+body {
+    color: $base-text-color;
+}
+
+a {
+    color: $base-color;
+    text-decoration: none;
+
+    &:hover {
+        color: $base-color-lighter;
+    }
+}

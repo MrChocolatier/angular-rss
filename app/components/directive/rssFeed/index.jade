@@ -1,9 +1,14 @@
-div(ng-repeat='item in feedData | orderBy: "-publishedDate"')
-  h2
-    | {{item.author}}
+div.feed-entry(ng-repeat='item in feedData | orderBy: "-publishedDate"' data-rss="item.meta.feedUrl")
+  div.feed-meta
+    a(target="_blank" ng-href="{{item.meta.link}}" title="{{item.meta.description}}")
+      | {{item.meta.title}}
+    | &nbsp;-&nbsp;
+    span.entry-info
+      span.entry-author  
+        | {{item.author}}
+      span.entry-date  
+        | {{item.publishedDate | date: 'dd.mm.yyyy hh:mm'}}
+  a(target="_blank" ng-href="{{item.link}}")
+    h2
+      | {{item.title}}
   div(ng-bind-html='item.content')
-  p
-    | {{item.publishedDate}}
-  a(ng-href='{{item.link}}')
-    | {{item.title}}
-  hr
