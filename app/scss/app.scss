@@ -1,21 +1,9 @@
-@import "normalize";
 @import "compass";
 @import "singularitygs";
+@import "bootstrap";
 
 /* ----- adjustment ----- */
 @import "adjustment/varibles";
 @import "adjustment/mixins";
 @import "adjustment/media";
-@import "adjustment/layouts";
-@import "adjustment/btn";
-
-/* ----- sections ----- */
-@import "sections/main-page";
-@import "sections/home";
-@import "sections/feeds";
-
-@include sgs-change('debug', false);
-
-.container {
-  @include background-grid($color: #ccc);
-}
+@import "sections/blog";

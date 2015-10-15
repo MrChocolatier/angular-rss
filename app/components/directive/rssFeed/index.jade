@@ -1,9 +1,12 @@
-div(ng-repeat='item in feedData | orderBy: "-publishedDate"')
-  h2
-    | {{item.author}}
-  div(ng-bind-html='item.content')
-  p
-    | {{item.publishedDate}}
-  a(ng-href='{{item.link}}')
+div.blog-post(ng-repeat='item in feedData | orderBy: "-publishedDate"')
+  h2.blog-post-title
     | {{item.title}}
-  hr
+  p.blog-post-meta
+    | {{item.publishedDate | date: 'dd/MM/yyyy'}}
+    =' '
+    span(ng-show="item.author")
+      | by
+      =' '
+      a(ng-href='{{item.link}}')
+        | {{item.author}}
+  p(ng-bind-html='item.content')

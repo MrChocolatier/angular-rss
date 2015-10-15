@@ -1,0 +1,6 @@
+ul.list-unstyled
+  li(ng-repeat="entry in rssList")
+    input(type="checkbox", ng-model="entry.show", ng-change="rssList.$save(entry)")
+    =' '
+    span
+      | {{entry.name}}

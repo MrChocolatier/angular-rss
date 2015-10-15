@@ -25,6 +25,7 @@
     //@ngInject
     function homeCtrlFn($scope, dataShare, displayRssFeed, feedManage, arrayFilter) {
         console.log('=== Home Controller ===');
+      window.scope = $scope;
         var log = [];
         var vm = this;
         $scope.urlArray = [];

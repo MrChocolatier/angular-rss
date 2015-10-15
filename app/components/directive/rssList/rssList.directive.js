@@ -10,11 +10,14 @@
       return {
         scope: {},
         templateUrl: function(tElem, tAttrs) {
-          return 'components/directive/rssList/index.html';
+
+          return tAttrs['template'] === 'list'
+            ? 'components/directive/rssList/list.html'
+            : 'components/directive/rssList/index.html'
         },
-        controller: function() {
+        controller: function($scope) {
           feedManage.getFeeds('feed').then(function(result) {
-            scope.rssList = result;
+            $scope.rssList = result;
           });
         }
       }
