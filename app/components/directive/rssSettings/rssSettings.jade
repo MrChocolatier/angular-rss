@@ -1,12 +1,15 @@
-ul.settings-list
+.sidebar-module
+  h4
+    | Settings
+  ol.list-unstyled
     li
-        label(for="entriesNumber")
-            | Entries Number
-        input#entriesNumber(type="number" value="4" min="0" ng-model="settings.entriesNumber")
+      label(for="entriesNumber")
+        | Entries Number
+      input#entriesNumber(type="number" value="4" min="0" ng-model="settings.entriesNumber")
     li
-        label(for="historicalEntries")
-            | Include Historical Entries
-        input#historicalEntries(type="checkbox" ng-model="settings.includeHistoricalEntries")
-    li
-        a.btn(href="" ng-click="applySettings()")
-            | Apply
+      input#historicalEntries(type="checkbox" ng-model="settings.includeHistoricalEntries")
+      label(for="historicalEntries")
+        | Include Historical Entries
+  div(rss-list="", template="list")
+  a.btn.btn-default(href="" ng-click="applySettings()")
+    | Apply

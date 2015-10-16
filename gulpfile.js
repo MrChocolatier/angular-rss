@@ -82,7 +82,7 @@ pipes.builtVendorScriptsDev = function() {
 pipes.builtAppScriptsDev = function() {
   return pipes.validatedAppScripts()
     .pipe(plugins.ngAnnotate()) // We use ngAnnotate for inject on Angular
-    .pipe(plugins.concat('app.js'))
+    //.pipe(plugins.concat('app.js'))
     .pipe(gulp.dest(paths.distDev));
 };
 // Built Style scss file
@@ -98,7 +98,7 @@ pipes.builtStylesDev = function() {
           css: paths.distDevCss,
           sass: './app/scss/',
           image: './app/img/',
-          require: ['compass', 'singularitygs', 'normalize-scss']
+          require: ['compass', 'singularitygs']
       }))
       .pipe(plugins.cssUrlAdjuster({
         replace:  ['../../app/img','../img/'] //When we use sprite we have wrong path for our sprite, this is fixed

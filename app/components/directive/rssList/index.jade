@@ -1,29 +1,32 @@
-table(class="manage-tbl")
-  tr
-    td
-      input(type="checkbox", ng-model='data.show', ng-checked='data.show = true', ng-hide='data.show')
-    td
-      input(ng-model="data.name")
-    td
-      input(ng-model="data.url")
-    td
-      a(class="btn" href="" ng-click="rssList.$add(data); data = ''")
-        | + Add
-  tr(ng-repeat="entry in rssList")
-    td(class='check-td')
-      input(type="checkbox", ng-model="entry.show", ng-change="rssList.$save(entry)")
-    td(class='name-td')
-      span(ng-show='!edit')
-        | {{entry.name}}
-      input(ng-model="entry.name", ng-hide='!edit')
-    td(class='url-td')
-      span(ng-show='!edit', title="{{entry.url}}")
-        | {{entry.url}}
-      input(ng-model="entry.url", ng-hide='!edit')
-    td(class='btn-td')
-      a.btn(href="" ng-click="rssList.$remove(entry)")
-        | Delete
-      a.btn(href="" ng-click="edit = !edit" ng-hide='edit')
-        | Edit
-      a.btn(href="" ng-click="rssList.$save(entry); edit = !edit" ng-show='edit')
-        | Save
+.panel.panel-default
+  .panel-heading
+    .row
+      .col-xs-10
+        input.form-control(placeholder='Name RSS', ng-model="data.name")
+      .col-xs-2
+        a.btn.btn-success(href="", ng-click="rssList.$add(data); data = ''")
+          i.glyphicon.glyphicon-plus
+        input(type="checkbox", ng-model='data.show', ng-checked='data.show = true', ng-hide='data.show')
+  .panel-body
+    input.form-control(placeholder='Url RSS', ng-model="data.url")
+
+.panel.panel-default(ng-repeat="entry in rssList")
+  .panel-heading
+    .row
+      .col-xs-10
+        span(ng-show='!edit')
+          | {{entry.name}}
+        input.form-control(ng-model="entry.name", ng-hide='!edit')
+      .col-xs-2
+        input(type="checkbox", ng-model="entry.show", ng-change="rssList.$save(entry)")
+  .panel-body
+    span.text-nowrap.text-overflow(ng-show='!edit', title="{{entry.url}}")
+      | {{entry.url}}
+    input.form-control(ng-model="entry.url", ng-hide='!edit')
+  .panel-footer
+    a.btn.btn-info(href="" ng-click="edit = !edit" ng-hide='edit')
+      i.glyphicon.glyphicon-pencil
+    a.btn.btn-success(href="" ng-click="rssList.$save(entry); edit = !edit" ng-show='edit')
+      i.glyphicon.glyphicon-save
+    a.btn.btn-danger(href="" ng-click="rssList.$remove(entry)")
+      i.glyphicon.glyphicon-trash

@@ -8,10 +8,16 @@
     //@ngInject
     function rssListDirective(feedManage) {
       return {
-        templateUrl: 'components/directive/rssList/index.html',
-        controller: function() {
+        scope: {},
+        templateUrl: function(tElem, tAttrs) {
+
+          return tAttrs['template'] === 'list'
+            ? 'components/directive/rssList/list.html'
+            : 'components/directive/rssList/index.html'
+        },
+        controller: function($scope) {
           feedManage.getFeeds('feed').then(function(result) {
-            scope.rssList = result;
+            $scope.rssList = result;
           });
         }
       }

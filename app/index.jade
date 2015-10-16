@@ -7,11 +7,30 @@ html(ng-app='app')
     // inject:css
     // endinject
   body
-    div.wrap
-      header.header(ng-include='"components/header.html"')
-      main.main
-        aside.sidebar(ng-include='"components/menu.html"')
-        section.content(ui-view=)
+    header.header(ng-include='"components/header.html"')
+    main.container
+      .blog-header
+        h1.blog-title
+          | The Rss Blog
+        .lead.blog-description
+          | The official rss blog by epam.
+      .row
+        section.col-sm-8.blog-main(ui-view=)
+        aside.col-sm-3.col-sm-offset-1.blog-sidebar(ng-include='"components/menu.html"')
+    footer.blog-footer
+      p
+        | Blog template built for
+        =' '
+        a(href="http://getbootstrap.com")
+          |Bootstrap
+        =' '
+        | by
+        a(href="https://twitter.com/mdo")
+          | @mdo
+        |.
+      p
+        a(href="")
+          | Back to top
     script(src='https://www.google.com/jsapi')
     // bower:js
     // endinject
